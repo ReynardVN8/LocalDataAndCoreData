@@ -46,6 +46,7 @@ class ViewController: UIViewController {
 //        let category = NoteCategory(context: context)
 //        category.name = "Song"
         
+        // Inserting data to corresponding Entity / Class Model and data type
         let categori = categories[3]
         categori.name = "Lagu"
         
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         
 //        category.notes = [note]
         
+        // Saving Data
         do {
             try context.save()
             loadData()
@@ -70,10 +72,15 @@ class ViewController: UIViewController {
         let context = appDelegate.persistentContainer.viewContext
         
         let fetchRequest:NSFetchRequest = NoteCategory.fetchRequest()
+        
+        // Selecting certain data (Select **** from **** While **** = ****)
 //        let predicate = NSPredicate(format: "name == %@", "Movie")
-        let sort = NSSortDescriptor(key: "name", ascending: true)
 //        fetchRequest.predicate = predicate
+        
+        // Sorting Data
+        let sort = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sort]
+        
         do{
             categories = try context.fetch(fetchRequest)
             tableView.reloadData()
