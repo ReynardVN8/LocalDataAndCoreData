@@ -43,6 +43,8 @@ class ViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
+//        MARK: - Create / Update
+        
 //        let category = NoteCategory(context: context)
 //        category.name = "Song"
         
@@ -67,7 +69,7 @@ class ViewController: UIViewController {
     }
     
     func loadData(){
-        
+        // Loading data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -96,6 +98,9 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        MARK: - Delete
+        // Deleting dertain data
+        
         if editingStyle == .delete{
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let context = appDelegate.persistentContainer.viewContext
@@ -119,6 +124,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        MARK: - Read
+        // Displaying data
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         if let note: Note = categories[indexPath.section].notes?[indexPath.row] as! Note? {
             cell.textLabel?.text = note.content
