@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
-//        MARK: - Create / Update
+//        MARK: - Create
         
 //        let category = NoteCategory(context: context)
 //        category.name = "Song"
@@ -63,6 +63,29 @@ class ViewController: UIViewController {
         do {
             try context.save()
             loadData()
+        } catch {
+            
+        }
+    }
+    
+//    MARK: - Update
+    
+    func updateData(text: String){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest = NoteCategory.fetchRequest()
+        let predicate = NSPredicate(format: "name == %@", "Movie")
+        fetchRequest.predicate = predicate
+        
+        do{
+            categories = try context.fetch(fetchRequest)
+            let note = Note(context: context)
+            note.content = "Alpha"
+            note.createdDate = Date()
+            do{
+                try context.save()
+                tableView.reloadData()
+            }
         } catch {
             
         }
