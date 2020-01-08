@@ -91,6 +91,29 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - Select
+    
+    func selectData(text: String){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest = NoteCategory.fetchRequest()
+        let predicate = NSPredicate(format: "name contains[c] %@", "Movie")
+        fetchRequest.predicate = predicate
+        
+        do{
+            categories = try context.fetch(fetchRequest)
+            let note = Note(context: context)
+            note.content = "Alpha"
+            note.createdDate = Date()
+            do{
+                try context.save()
+                tableView.reloadData()
+            }
+        } catch {
+            
+        }
+    }
+    
     func loadData(){
         // Loading data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
